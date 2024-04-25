@@ -18,8 +18,8 @@ This code is available on Github: https://github.com/miguel-mmt2/PL5_Team_1_Repo
 #define SERVO_PIN 2
 
 // Internet Name and Password
-const char* ssid = "Vodafone-16B85B";
-const char* password = "VpARFuY9aE";
+const char* ssid = "TELLO-E917A0";
+const char* password = "88888888";
 
 WiFiServer server(80);
 

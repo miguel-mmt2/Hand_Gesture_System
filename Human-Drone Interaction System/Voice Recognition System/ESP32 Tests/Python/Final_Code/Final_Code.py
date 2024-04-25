@@ -15,10 +15,14 @@ This code is available on Github: https://github.com/miguel-mmt2/PL5_Team_1_Repo
 import socket
 import serial
 import serial.tools.list_ports
+from djitellopy import tello
 
 # ESP32 WiFi IP
-ESP32_IP = '192.168.1.215' 
+ESP32_IP = '192.168.10.1' 
 ESP32_PORT = 80
+
+drone = tello.Tello()
+drone.connect()
 
 # Socket TCP/IP criation
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,7 +40,7 @@ try:
         print(port)
 
     # Serial port that the Arduino Nano Ble Sense is connected
-    portVar = '/dev/cu.usbmodem11101'
+    portVar = '/dev/cu.usbmodem1101'
 
     # Serial Port configuration
     serialInst = serial.Serial(port=portVar, baudrate=9600)
@@ -52,11 +56,13 @@ try:
                 message = "GREEN"
                 print("Received GREEN, sending message to ESP32:", message)
                 client_socket.sendall(message.encode())
+                #drone.takeoff()
 
             elif packet == 'RED':
                 message = "RED"
                 print("Received RED, sending message to ESP32:", message)
                 client_socket.sendall(message.encode())
+                #drone.land()
 
 except Exception as e:
     print("Error", e)
